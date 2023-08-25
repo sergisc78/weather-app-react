@@ -1,41 +1,66 @@
 import React, { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 
 export const RegisterRoute = () => {
 
 
   const [user, setUser] = useState({
-    emaul: '',
+    email: '',
     password: ''
   })
 
+  const { singup } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState()
 
-  const handleChange = ({target:{name,value}}) => {
-    setUser({...user,[name]:value});
+
+  const handleChange = ({ target: { name, value } }) => {
+    setUser({ ...user, [name]: value });
   }
 
-  const handleSumit = (e) => {
+  const handleSumit = async (e) => {
     e.preventDefault();
-    console.log(user);
+    setError('')
+    try {
+      await singup(user.email, user.password)
+      navigate('/search')
+    } catch (error) {
+      console.log(error.code);
+      if (error.code === "auth/invalid-email") {
+        setError("Invalid email")
+      } else if (error.code === "auth/weak-password") {
+        setError("Password too weak, at least 6 characters")
+      } else if (error.code === "auth/email-already-exists") {
+        setError("User exists !!")
+      }
+    }
   }
 
   return (
     <div>
       <h1>Register</h1>
 
-      <form onSubmit={handleSumit}>
+      <div>
 
-        <label htmlFor="email">Email</label>
-        <input type="email" name='email' placeholder='email@company.com' onChange={handleChange} />
+        {error && <p>{error}</p>}
 
-        <label htmlFor="password">Password</label>
-        <input type="password" name='password' id='password' onChange={handleChange} />
+        <form onSubmit={handleSumit}>
 
-        <button className='register'>Register</button>
+          <label htmlFor="email">Email</label>
+          <input type="email" name='email' placeholder='email@company.com' onChange={handleChange} />
 
-      </form>
+          <label htmlFor="password">Password</label>
+          <input type="password" name='password' id='password' onChange={handleChange} />
+
+          <button className='register'>Register</button>
+
+        </form>
+      </div>
 
 
     </div>
   )
 }
+

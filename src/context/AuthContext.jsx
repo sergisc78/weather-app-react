@@ -1,4 +1,8 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { createContext, useContext } from "react";
+import { auth } from "../firebase/firebase";
+
+
 
 // CREATE CONTEXT PERMET COMPARTIR INFO ENTRE COMPONENTS
 
@@ -8,20 +12,19 @@ export const authContext = createContext()
 
 export const useAuth = () => {
     const context = useContext(authContext);
-    if(!context) throw new error ("There is no auth provider")
+    if (!context) throw new error("There is no auth provider")
 
     return context;
 }
 
-
 export const AuthProvider = ({ children }) => {
 
-    const user = {
-        login: true
-    }
 
+    // FIREBASE 
+
+    const singup = (email, password) => createUserWithEmailAndPassword(auth, email, password);
     return (
-        <authContext.Provider value={{ user }}>
+        <authContext.Provider value={{ singup }}>
             {children}
         </authContext.Provider>
     )
