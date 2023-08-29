@@ -1,12 +1,20 @@
 import React from 'react'
 import UserImage from '../assets/img/user.png'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+
+
+
 
 
 export const NavbarComponent = () => {
+
+  
+ 
   return (
 
     <header>
+      
       <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div className="container-fluid">
           <NavLink className="nav-link active" to={'/'}>Weather Search App</NavLink>
@@ -23,7 +31,7 @@ export const NavbarComponent = () => {
               </li>
             </ul>
 
-
+             
             <NavLink className="nav-link user-icon" to={'/login'}> <img src={UserImage} alt="userImage" height={30} width={30} /></NavLink>
 
 

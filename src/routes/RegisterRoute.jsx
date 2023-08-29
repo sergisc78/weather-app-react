@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { AlertComponent } from '../components/AlertComponent'
+
 
 
 export const RegisterRoute = () => {
@@ -44,7 +46,7 @@ export const RegisterRoute = () => {
 
       <div>
 
-        {error && <p>{error}</p>}
+      {error && <AlertComponent message={error}/>}
 
         <form onSubmit={handleSumit}>
 

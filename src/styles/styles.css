@@ -117,6 +117,12 @@ nav {
     font-family:'Montserrat', sans-serif ;
     
   }
+
+  /* ALERT */
+  
+  .alert-dismissible{
+    margin-top: 4px;
+  }
  
 
 
