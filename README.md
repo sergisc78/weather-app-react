@@ -1,10 +1,8 @@
-#Weather App :
+# WEATHER APP :
 
--FrontEnd ->React + Vite
-
--API-> https://openweathermap.org/
-
--Styles -> Bootstrap and CSS
+- FRONTEND -> REACT+ VITE
+- API ->  https://openweathermap.org/
+- STYLES -> CSS and Bootstrap
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
